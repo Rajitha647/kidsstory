@@ -5,6 +5,8 @@ import Spinner from 'react-bootstrap/Spinner';
 import { CommentProvider } from './components/commentprovider';
 import Headernav from './components/headernav';
 import Usememoex from './components/usememoex';
+import UseCallback from './components/usecallback';
+import Homepage from './components/homepage';
 
 const Hpage = lazy(() => import('./components/homepage'));
 const Apage = lazy(() => import('./components/about'));
@@ -15,6 +17,7 @@ function App() {
       <CommentProvider>
         <Headernav />
         <Usememoex/>
+       
         <section>
           <Suspense
             fallback={
@@ -33,6 +36,8 @@ function App() {
           </Suspense>
         </section>
       </CommentProvider>
+    
+       {/* <UseCallback/> */}
     </>
   );
 }
