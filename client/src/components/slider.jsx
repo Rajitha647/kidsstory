@@ -3,7 +3,6 @@ import Pictureframe from './pictureframe';
 import bg1 from './images/bg1.jpg';
 import bg2 from './images/bg2.jpg';
 import bg3 from './images/bg3.jpg';
-// import bg4 from './images/bg4.jpg';
 
 function Slider() {
   return (

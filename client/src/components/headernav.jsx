@@ -3,28 +3,36 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Modal from 'react-bootstrap/Modal';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
 import Register from './register';
 import Login from './login';
+import CommentContext from './commentprovider';
+
 
 function Headernav() {
-    const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+  const [open, setOpen] = useState(false);
+  const HandleClose = () => setOpen(false);
+  const HandleOpen = () => setOpen(true);
+
+  const { comment, setComment } = useContext(CommentContext);
+
   return (
     <Navbar expand="lg" bg="primary" data-bs-theme="dark">
       <Container>
-        <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+        <Navbar.Brand href="#home">KeralaTour
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/about">About</Nav.Link>
             <Nav.Link onClick={handleShow}>Register</Nav.Link>
-            <Nav.Link href='/about'>About</Nav.Link>
-            <Nav.Link onClick={handleShow}>Login</Nav.Link>
+            <Nav.Link onClick={HandleOpen}>Login</Nav.Link>
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
@@ -36,6 +44,19 @@ function Headernav() {
                 Separated link
               </NavDropdown.Item>
             </NavDropdown>
+            
+          <input
+            type="text"
+            name="sch"
+            onChange={(e) => {
+              setComment(e.target.value);
+            }}
+            className="form-control"
+            placeholder="search"
+          />
+            <Button variant="danger" onClick={() => setComment("test")}>
+              Test
+            </Button>
           </Nav>
         </Navbar.Collapse>
       </Container>
@@ -44,7 +65,7 @@ function Headernav() {
           <Modal.Title>Registration Form</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Register/>
+          <Register />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
@@ -55,14 +76,21 @@ function Headernav() {
           </Button>
         </Modal.Footer>
       </Modal>
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={open} onHide={HandleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Login</Modal.Title>
+          <Modal.Title>Login Form</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Login/>
+          <Login />
         </Modal.Body>
-        
+        <Modal.Footer>
+          <Button variant="secondary" onClick={HandleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={HandleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
       </Modal>
     </Navbar>
   );
